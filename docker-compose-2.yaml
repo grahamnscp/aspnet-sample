@@ -1,0 +1,19 @@
+version: "3.3"
+
+services:
+  aspdnet:
+    image: grahamh/aspnet-sample:2.0
+    networks:
+      - aspnet
+    deploy:
+      replicas: 2
+      labels:
+        com.docker.lb.hosts: asp.apps.gwhale.dckr.org
+        com.docker.lb.network: aspnet
+        com.docker.lb.port: 80
+      placement:
+        constraints:
+          - 'node.platform.os == windows'
+
+networks:
+  aspnet:

@@ -1,0 +1,20 @@
+version: "3.3"
+
+services:
+  asp:
+    image: grahamh/aspnet-sample:2.0
+    ports:
+      - mode: host
+        target: 80
+        published: 8082
+    networks:
+      - aspnet
+    deploy:
+      endpoint_mode: dnsrr
+      replicas: 2
+      placement:
+        constraints:
+          - 'node.platform.os == windows'
+
+networks:
+  aspnet:
