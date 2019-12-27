@@ -1,0 +1,14 @@
+
+ systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+>>
+OS Name:                   Microsoft Windows Server Datacenter
+OS Version:                10.0.17763 N/A Build 17763
+
+
+
+(Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").ReleaseId
+>>
+1809
+
+
+-->  sample image tag used: grahamh/aspnet-sample:1809-10.0.17763
