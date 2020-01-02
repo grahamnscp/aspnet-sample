@@ -1,0 +1,56 @@
+{
+  "id": "/dev/windowsapps/aspnet-sample",
+  "cmd": null,
+  "cpus": 1,
+  "mem": 1024,
+  "disk": 0,
+  "instances": 1,
+  "acceptedResourceRoles": [
+    "*"
+  ],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "forcePullImage": false,
+      "image": "grahamh/aspnet-sample:1809-10.0.17763",
+      "parameters": [],
+      "privileged": false
+    },
+    "volumes": [],
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "protocol": "tcp",
+        "servicePort": 10007,
+        "name": "aspnetsample"
+      }
+    ]
+  },
+  "constraints": [
+    [
+      "@region",
+      "IS",
+      "windows"
+    ]
+  ],
+  "healthChecks": [{
+    "protocol": "HTTP",
+    "path": "/",
+    "portIndex": 0,
+    "timeoutSeconds": 10,
+    "gracePeriodSeconds": 600,
+    "intervalSeconds": 20,
+    "maxConsecutiveFailures": 20
+  }],
+  "networks": [{
+      "mode": "container/bridge"
+  }],
+  "portDefinitions": [],
+  "labels": {
+    "HAPROXY_GROUP":"external",
+    "HAPROXY_DEPLOYMENT_GROUP":"ASPNET",
+    "HAPROXY_DEPLOYMENT_ALT_PORT":"10007",
+    "HAPROXY_0_REDIRECT_TO_HTTPS":"false",
+    "HAPROXY_0_VHOST":"aspnet-sample.mesoslab.io"
+  }
+}

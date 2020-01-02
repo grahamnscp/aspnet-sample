@@ -1,0 +1,53 @@
+{
+  "id": "/dev/windowsapps/aspnet-sample",
+  "cmd": null,
+  "cpus": 1,
+  "mem": 1024,
+  "disk": 0,
+  "instances": 1,
+  "acceptedResourceRoles": [
+    "*"
+  ],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "forcePullImage": false,
+      "image": "grahamh/aspnet-sample:1809-10.0.17763",
+      "parameters": [],
+      "privileged": false
+    },
+    "volumes": [],
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "hostPort": 10008,
+        "labels": {
+          "VIP_0": "/aspnetsample:10008"
+        },
+        "name": "aspnetsample",
+        "protocol": "tcp",
+        "servicePort": 10008
+      }
+    ]
+  },
+  "constraints": [
+    [
+      "@region",
+      "IS",
+      "windows"
+    ]
+  ],
+  "healthChecks": [{
+    "protocol": "HTTP",
+    "path": "/",
+    "portIndex": 0,
+    "timeoutSeconds": 10,
+    "gracePeriodSeconds": 300,
+    "intervalSeconds": 20,
+    "maxConsecutiveFailures": 20
+  }],
+  "networks": [{
+      "mode": "container/bridge"
+  }],
+  "portDefinitions": []
+}
